@@ -1,0 +1,80 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Poetry
+poetry.lock
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VSCode settings
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# Pytest, coverage, and test outputs
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+test-results/
+junit.xml
+
+# MyPy, Ruff, and other tool caches
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+.pytype/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Model artifacts and large data
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+*.csv.gz
+*.parquet
+
+# NAB data (keep labels, ignore large data)
+NAB/results/
+!NAB/labels/
+!NAB/data/README.md
+
+# Local config overrides and secrets
+configs/local/
+configs/*.local.yaml
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.yaml
+secrets.json
+
+# Gradio/streamlit app cache
+gradio_cached_examples/
+flagged/
+app/__pycache__/

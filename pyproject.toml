@@ -1,0 +1,35 @@
+[project]
+name = "drift-aware-anomaly-detection"
+version = "0.1.0"
+description = "Alert-budget controlled anomaly detection (baseline + ML) with event-based evaluation."
+authors = [
+    {name = "David McKinney", email = "40120430+mckinneydavid1@users.noreply.github.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pandas (>=3.0.1,<4.0.0)",
+    "numpy (>=2.4.2,<3.0.0)",
+    "scikit-learn (>=1.8.0,<2.0.0)",
+    "matplotlib (>=3.10.8,<4.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)",
+    "gradio (>=6.7.0,<7.0.0)",
+    "ruff (>=0.15.4,<0.16.0)",
+]
+
+[tool.poetry]
+packages = [{ include = "anomaly_budget", from = "src" }]
+
+[tool.poetry.scripts]
+anomaly-budget = "anomaly_budget.cli:main"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.1.1"
+pytest = "^9.0.2"
+black = "^26.1.0"
+ipykernel = "^7.2.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

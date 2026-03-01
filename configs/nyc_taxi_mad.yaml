@@ -1,0 +1,90 @@
+# ----------------------------------------
+# NYC Taxi — Rolling MAD Baseline (Seasonality-Aware)
+# ----------------------------------------
+
+_meta:
+  experiment: nyc_taxi_mad_baseline
+  description: >
+    Seasonality-aware Rolling MAD baseline on NAB nyc_taxi.
+    Applies daily seasonal differencing (period=24 for 30-min data),
+    scores via rolling MAD (window=24), and uses a fixed threshold
+    selected from the training distribution (93.7th percentile ~ 1.409).
+    Evaluated with point metrics + NAB-style event-window metrics.
+
+# ----------------------------------------
+# Dataset
+# ----------------------------------------
+
+dataset:
+  name: nyc_taxi
+  path: ../NAB/data/realKnownCause/nyc_taxi.csv
+  timestamp_col: timestamp
+  value_col: value
+  label_col: null # NAB labels applied separately
+
+# ----------------------------------------
+# Train / Test Split
+# ----------------------------------------
+
+split:
+  train_frac: 0.7
+
+# ----------------------------------------
+# Labels (NAB JSON format)
+# ----------------------------------------
+
+labels:
+  type: nab_combined
+  path: ../NAB/labels/combined_labels.json
+  series_key: realKnownCause/nyc_taxi.csv
+  match_mode: suffix
+  window_minutes: 60
+
+# ----------------------------------------
+# Features
+# ----------------------------------------
+
+features:
+  kind: seasonal_diff
+  period: 24 # daily seasonality for 30-min sampled series (48 points/day => diff at 24 ~= half-day; see note below)
+
+# NOTE:
+# For nyc_taxi, you observed that differencing at 24 improved robustness.
+# If you later want to compare full-day seasonality, try period: 48.
+
+# ----------------------------------------
+# Model Configuration
+# ----------------------------------------
+
+model:
+  type: baseline_mad
+
+baseline_mad:
+  value_col: seasonal_diff
+  window: 24
+
+# ----------------------------------------
+# Thresholding (locked operating point from notebook)
+# ----------------------------------------
+
+threshold:
+  method: fixed
+  threshold: 1.409069
+  selected_from:
+    train_percentile: 93.7
+    expected_alert_rate: 0.0578
+
+evaluation:
+  mode: event
+  window_tolerance: 60min # expand labeled windows by +/- 60min
+  pred_merge_gap: 60min # merge predicted points into bursts
+  pred_min_width: 30min # ensure predicted windows have at least this duration
+
+# ----------------------------------------
+# Output Artifacts
+# ----------------------------------------
+
+output:
+  dir: outputs/nyc_taxi_mad
+  save_scored_frame: true
+  save_metrics: true

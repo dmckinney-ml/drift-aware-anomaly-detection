@@ -1,0 +1,46 @@
+_meta:
+  experiment: nyc_taxi_iforest
+  description: >
+    Isolation Forest on NAB nyc_taxi with rolling-context features and alert-rate thresholding.
+
+dataset:
+  name: nyc_taxi
+  path: ../NAB/data/realKnownCause/nyc_taxi.csv
+  timestamp_col: timestamp
+  value_col: value
+  label_col: null
+
+labels:
+  type: nab_combined
+  path: ../NAB/labels/combined_labels.json
+  series_key: realKnownCause/nyc_taxi.csv
+  match_mode: suffix
+  window_minutes: 60
+
+split:
+  train_frac: 0.7
+
+features:
+  kind: rolling_context
+  roll_window: 24
+  long_window: 168
+  include_raw: true
+
+model:
+  type: iforest
+
+iforest:
+  n_estimators: 800
+  max_samples: 256
+  max_features: 1.0
+  random_state: 42
+  n_jobs: -1
+
+threshold:
+  method: alert_rate
+  alert_rate: 0.05
+
+output:
+  dir: outputs/nyc_taxi_iforest
+  save_scored_frame: true
+  save_metrics: true
