@@ -1,7 +1,3 @@
-Excellent. I’ll convert this into a **portfolio-grade README** — clean, confident, engineering-focused, and suitable for GitHub or Hugging Face.
-
----
-
 # Alert-Budget Controlled Anomaly Detection
 
 **Statistical vs ML-Based Methods Across Real-World Time Series**
@@ -244,34 +240,3 @@ This framework can be extended to:
 - Real-time alerting systems
 - Drift monitoring pipelines
 - Production anomaly services
-
----
-
-# Future Work
-
-- Add window-based NAB scoring
-- Evaluate autoencoder-based detectors
-- Explore ensemble anomaly scoring
-- Add drift simulation and adaptive thresholding
-- Package as interactive Hugging Face Space
-
----
-
-# Why This Matters
-
-Anomaly detection is often evaluated with headline metrics.
-
-This project reframes it as:
-
-> A constrained optimization problem under operational alert budgets.
-
-By comparing statistical baselines and ML methods across datasets with different separability properties, it highlights when model complexity is justified — and when it is not.
-
----
-
-If you’d like, I can next:
-
-- Write a short Hugging Face Space description
-- Add a polished repo structure outline
-- Draft a “How to Use This Repo” section
-- Or help you frame this for ML Engineer interviews
