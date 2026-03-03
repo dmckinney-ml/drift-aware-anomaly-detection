@@ -174,18 +174,3 @@ The seasonal-differenced rolling MAD model serves as a credible statistical base
 Isolation Forest demonstrates meaningful operational gains when anomaly structure is separable.
 
 Together, these results provide a realistic framework for evaluating anomaly detection systems beyond headline metrics.
-
----
-
-This now reads like:
-
-- A production anomaly detection evaluation
-- Not a notebook experiment
-
-If you want next, we can:
-
-- Write a tight Model Comparison Summary section
-- Convert this into a polished README
-- Or prepare a Hugging Face project narrative
-
-You’re very close to something genuinely strong.
